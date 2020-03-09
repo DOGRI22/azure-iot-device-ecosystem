@@ -1,12 +1,10 @@
 ---
-platform: {enter the OS name running on edge device}
-device: {enter your device name here}
-language: {enter the language used to you edge device}
+platform: Debian 9 stretch
+device: Barracuda Secure Connector 2
+language: python
 ---
 
-*We highly recommend keeping this document current, and Microsoft reserves a right to remove devices and documents from the Azure IoT Device Catalog if document contains broken URL links, incorrect information etc.*
-
-Run a simple {enter the language used to you edge device} sample on {enter your device name here} device running {enter the OS name running on edge device. Specify distribution or Windows SKU information. Ex: Ubuntu Sever 16.04, Windows 10 IoT Core. Only [Tier 1 OS](https://docs.microsoft.com/en-us/azure/iot-edge/support) is allowed}
+Run a simple python sample on Barracuda Secure Connector 2 Container device running Debian 9 stretch.
 ===
 ---
 
@@ -19,19 +17,14 @@ Run a simple {enter the language used to you edge device} sample on {enter your 
 -   [Step 4: Next Steps](#NextSteps)
 -   [Step 5: Troubleshooting](#Step-5-Troubleshooting)
 
-# Instructions for using this template
 
--   Replace the text in {placeholders} with correct values.
--   Delete the lines {{enclosed}} after following the instructions enclosed between them.
--   It is advisable to use external links, wherever possible.
--   Remove this section from final document.
 
 <a name="Introduction"></a>
 # Introduction
 
 **About this document**
 
-This document describes how to connect {enter your device name here} device running {enter the OS name running on edge device} with Azure IoT Edge Runtime pre-installed and Device Management. This multi-step process includes:
+This document describes how to connect Barracuda Secure Connector 2 device running Debian 9 stretch with Azure IoT Edge Runtime pre-installed and Device Management. This multi-step process includes:
 
 -   Configuring Azure IoT Hub
 -   Registering your IoT device
@@ -48,13 +41,27 @@ You should have the following items ready before beginning the process:
 -   [Sign up to IOT Hub](https://account.windowsazure.com/signup?offer=ms-azr-0044p)
 -   [Add the Edge Device](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux)
 -   [Add the Edge Modules](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#deploy-a-module)
--   {enter your device name here} device.
--   {{Please specify if any other software(s) or hardware(s) are required.}}
+-   Barracuda Secure Connector 2 device.
+-   Set-up your Barracuda SC infrastructure via:
+    -   Barracuda IoT Connect (https://campus.barracuda.com/product/cloudgenfirewall/doc/90443963/barracuda-iot-connect/), or
+    -   using Git-hub templates for setting up Barracuda Control Center, Access Controller and CloudGen Firewall (https://github.com/barracudanetworks/ngf-azure-templates/tree/master/contrib/CGF-Custom-CC-SAC-CGF)
 
 <a name="PrepareDevice"></a>
 # Step 2: Prepare your Device
 
--   {{Write down the instructions required to setup, configure and connect your device. Please use external links when possible pointing to your own page with device preparation steps.}}
+Barracuda Secure Connector is a centrally managed device and needs following additional products to run: (1) Barracuda Firewall Control Center for configuration and management and (2) Barracuda Secure Access Controller as the VPN hub for all your Secure Connector appliances. Barracuda offer two options to set-up the SC infrastructure:
+-   Barracuda IoT Connect, please visit https://campus.barracuda.com/product/cloudgenfirewall/doc/90444698/get-started-with-barracuda-iot-connect/
+-   Custom Secure Connector Azure deployment, please visit https://campus.barracuda.com/product/cloudgenfirewall/doc/91128292/barracuda-secure-connector/
+
+When your infrastructure is up and running and you have your first Secure Connector appliance connected please enable
+pre-installed Microsoft Azure IoT Edge Components in your Barracuda Firewall Control Center:
+-   Go to Secure Connector Editor and open configuration of an individual SC or a SC template
+-   In the Secure Connector configuration go to Container Settings.
+-   Enable Container
+-   Define root password for container
+-   Choose Microsoft IoTEdge as your container engine
+-   Enter the IoTEdge Device Connection String
+
 
 <a name="Manual"></a>
 # Step 3: Manual Test for Azure IoT Edge on device
@@ -164,7 +171,7 @@ Once you shared the documents with us, we will contact you in the following 48 t
 <a name="Step-5-Troubleshooting"></a>
 # Step 5: Troubleshooting
 
-Please contact engineering support on **<mailto:iotcert@microsoft.com>** for help with troubleshooting.
+Please contact engineering support on mailto:iotcert@microsoft.com for help with troubleshooting.
   
 [setup-devbox-linux]: https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md
 [lnk-setup-iot-hub]: ../setup_iothub.md
