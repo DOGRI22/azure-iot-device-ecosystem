@@ -118,13 +118,13 @@ On the device details page of the Azure, you should see the runtime modules - ed
 ```
 - Download the Microsoft Azure IoT Device SDK to the board by issuing the following command on the Secure Connector:
 
-    git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
+    `git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git`
 
 - Install pip package manager:
-
+```
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python3 get-pip.py
-
+```
 - Install Azure IoT Device SDK:
 
     pip install azure-iot-device
