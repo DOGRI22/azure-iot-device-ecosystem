@@ -1,10 +1,10 @@
 ---
-platform: windows 10 enterprise ltsc
-device: rco-3200 rugged edge computer
+platform: windows 10 enterprise 2019 ltsc
+device: st102
 language: csharp
 ---
 
-Run a simple Csharp sample on RCO-3200 Rugged Edge Computer device running Windows 10 Enterprise LTSC
+Run a simple Csharp sample on ST102 device running Windows 10 Enterprise 2019 LTSC
 ===
 ---
 
@@ -21,7 +21,7 @@ Run a simple Csharp sample on RCO-3200 Rugged Edge Computer device running Windo
 
 **About this document**
 
-This document describes how to connect RCO-3200 Rugged Edge Computer device running Windows 10 Enterprise LTSC with Azure IoT SDK. This multi-step process includes:
+This document describes how to connect ST102 device running Windows 10 Enterprise 2019 LTSC with Azure IoT SDK. This multi-step process includes:
 -   Configuring Azure IoT Hub
 -   Registering your IoT device
 -   Build and deploy Azure IoT SDK on device
@@ -34,12 +34,12 @@ You should have the following items ready before beginning the process:
 -   [Prepare your development environment][setup-devbox-windows]
 -   [Setup your IoT hub][lnk-setup-iot-hub]
 -   [Provision your device and get its credentials][lnk-manage-iot-hub]
--   RCO-3200 Rugged Edge Computer device.
+-   ST102 device.
 
 <a name="PrepareDevice"></a>
 # Step 2: Prepare your Device
 
--   After powering up your RCO-3200 Rugged Edge Computer device, be sure that it has established a network connection whether it is through ethernet, Wi-Fi, or cellular. For more information, please download the device's <a href="https://premio.blob.core.windows.net/premio/uploads/resource/user-manual/UM-RCO-3200.pdf" rel="nofollow">User's Manual</a>.
+-   Turn on the ST102 device and connect to internet.
 
 <a name="Build"></a>
 # Step 3: Build and Run the sample

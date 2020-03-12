@@ -1,10 +1,10 @@
 ---
-platform: windows 10 enterprise ltsc
-device: rco-3200 rugged edge computer
+platform: windows 10 enterprise 2016 ltsb
+device: rt101
 language: csharp
 ---
 
-Run a simple Csharp sample on RCO-3200 Rugged Edge Computer device running Windows 10 Enterprise LTSC
+Run a simple Csharp sample on RT101 device running Windows 10 Enterprise 2016 LTSB
 ===
 ---
 
@@ -21,7 +21,7 @@ Run a simple Csharp sample on RCO-3200 Rugged Edge Computer device running Windo
 
 **About this document**
 
-This document describes how to connect RCO-3200 Rugged Edge Computer device running Windows 10 Enterprise LTSC with Azure IoT SDK. This multi-step process includes:
+This document describes how to connect RT101 device running Windows 10 Enterprise 2016 LTSB with Azure IoT SDK. This multi-step process includes:
 -   Configuring Azure IoT Hub
 -   Registering your IoT device
 -   Build and deploy Azure IoT SDK on device
@@ -34,12 +34,12 @@ You should have the following items ready before beginning the process:
 -   [Prepare your development environment][setup-devbox-windows]
 -   [Setup your IoT hub][lnk-setup-iot-hub]
 -   [Provision your device and get its credentials][lnk-manage-iot-hub]
--   RCO-3200 Rugged Edge Computer device.
+-   RT101 device.
 
 <a name="PrepareDevice"></a>
 # Step 2: Prepare your Device
 
--   After powering up your RCO-3200 Rugged Edge Computer device, be sure that it has established a network connection whether it is through ethernet, Wi-Fi, or cellular. For more information, please download the device's <a href="https://premio.blob.core.windows.net/premio/uploads/resource/user-manual/UM-RCO-3200.pdf" rel="nofollow">User's Manual</a>.
+-   Turn on the RT101 device and connect to internet.
 
 <a name="Build"></a>
 # Step 3: Build and Run the sample
@@ -95,5 +95,5 @@ You have now learned how to run a sample application that collects sensor data a
 [Weather forecast using the sensor data from your IoT hub in Azure Machine Learning]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-weather-forecast-machine-learning
 [Remote monitoring and notifications with Logic Apps]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-monitoring-notifications-with-azure-logic-apps
 [setup-devbox-windows]: https://github.com/Azure/azure-iot-sdk-csharp/blob/master/doc/devbox_setup.md
-[lnk-setup-iot-hub]: ../setup_iothub.md
-[lnk-manage-iot-hub]: ../manage_iot_hub.md
+[lnk-setup-iot-hub]: ../../setup_iothub.md
+[lnk-manage-iot-hub]: ../../manage_iot_hub.md

@@ -14,8 +14,8 @@ Run a simple python sample on Barracuda Secure Connector 2 Container device runn
 -   [Step 1: Prerequisites](#Prerequisites)
 -   [Step 2: Prepare your Device](#PrepareDevice)
 -   [Step 3: Manual Test for Azure IoT Edge on device](#Manual)
--   [Step 4: Next Steps](#NextSteps)
--   [Step 5: Troubleshooting](#Step-5-Troubleshooting)
+-   [Step 4: Run a simple Python sample on Barracuda Secure Connector](#Sample)
+
 
 
 
@@ -56,11 +56,19 @@ Barracuda Secure Connector is a centrally managed device and needs following add
 When your infrastructure is up and running and you have your first Secure Connector appliance connected please enable
 pre-installed Microsoft Azure IoT Edge Components in your Barracuda Firewall Control Center:
 -   Go to Secure Connector Editor and open configuration of an individual SC or a SC template
+
+    ![](./images/SecureConnectorCC.PNG)
+=======
+
 -   In the Secure Connector configuration go to Container Settings.
 -   Enable Container
 -   Define root password for container
 -   Choose Microsoft IoTEdge as your container engine
 -   Enter the IoTEdge Device Connection String
+
+    ![](./images/Container.PNG)
+=======
+
 
 
 <a name="Manual"></a>
@@ -100,79 +108,48 @@ On the device details page of the Azure, you should see the runtime modules - ed
 
  ![](./images/tempSensor.png)
 
-<a name="Step-3-2-DeviceManagement"></a>
-## 3.2 Device Management (Optional)
+<a name="Sample"></a>
+## 4 Run a python sample
 
 **Pre-requisites:** Device Connectivity.
 
-**Description:** A device that can perform basic device management operations (Reboot and Firmware update) triggered by messages from IoT Hub.
+## 4.1 Build SDK and sample:
 
-## 3.2.1 Firmware Update (Using Microsoft SDK Samples):
-
-Specify the path {{enter the path}} where the firmwareupdate client components are installed.
-
-To run the simulated device application, open a shell or command prompt window and navigate to the **iot-hub/Tutorials/FirmwareUpdate** folder in the Node.js project you downloaded. Then run the following commands:
-
-    npm install
-    node SimulatedDevice.js "{your device connection string}"
-
-To run the back-end application, open another shell or command prompt window. Then navigate to the **iot-hub/Tutorials/FirmwareUpdate** folder in the Node.js project you downloaded. Then run the following commands:
-
-    npm install
-    node ServiceClient.js "{your service connection string}"
-
-IoT device client will get the message and report the status to the device twin.
-
- ![](./images/devicetwin.png)
-
-**Update firmware**
-
-Confirm the IoT hub, Device ID, method name and method payload as below:
-
--   Press “call Method” button
--   Check the returning status as below:
-
- ![](./images/firmware.png)
-
-
-## 3.2.2 Reboot (Using Microsoft SDK Samples):
-
-Specify the path {{enter the path}} where the components are installed 
-
-Confirm the IoT hub, Device ID, method name as below:
-
--   Press “call Method” button
--   Check the returning status as below:
-
- ![](./images/reboot.png)
+- Open a PuTTY (or SSH) session and connect to the device
+- Install the prerequisite packages for the Microsoft Azure IoT Device SDK for Python by issuing the following commands from the command line on your Secure Connector:
+```
+    apt-get update & apt-get upgrade
+    apt-get install -y curl libcurl4-openssl-dev build-essential cmake git python2.7-dev libboost-python-dev
+```
+- Download the Microsoft Azure IoT Device SDK to the board by issuing the following command on the Secure Connector:
+```
+git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
+```
+- Install pip package manager:
+```
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
+```
+- Install Azure IoT Device SDK:
+``` 
+    pip install azure-iot-device
+```
+- Navigate to samples folder by executing following command:
+```
+    cd azure-iot-sdk-python/device/samples/
+```
+- Configfure connection string for sample code:
+```
+    export IOTHUB_DEVICE_CONNECTION_STRING="<your connection string here>"
+```
+- Run the python sample:
+```
+    python3 simple_send_message.py
+```
+- You schould see the massege ios scessfully send to Azure IoT Hub:
+![](./images/pyMessage.PNG)
 
 
-IoT device client will get the message and report the status to the device twin.
-
- ![](./images/devicetwinmessage.png)
-  
-## 3.3.3 Firmware Update (Modified SDK samples/Custom made application):
-
-If the Client components are custom made please add the steps to execute the Firmware Update through Device Twin.
-
-**Note**: Client Components must be shipped with the device 
-
-## 3.3.4 Reboot (Modified SDK samples/Custom made application):
-
-If the Client components are custom made please add the steps to execute the Device Reboot through Direct Methods
-
-**Note**: Client Components must be shipped with the device 
-
-<a name="NextSteps"></a>
-# Step 4: Next steps
-
-Once you shared the documents with us, we will contact you in the following 48 to 72 business hours with next steps.
-
-<a name="Step-5-Troubleshooting"></a>
-# Step 5: Troubleshooting
-
-Please contact engineering support on mailto:iotcert@microsoft.com for help with troubleshooting.
-  
 [setup-devbox-linux]: https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md
 [lnk-setup-iot-hub]: ../setup_iothub.md
 [lnk-manage-iot-hub]: ../manage_iot_hub.md
