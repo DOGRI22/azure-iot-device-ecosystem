@@ -56,13 +56,19 @@ Barracuda Secure Connector is a centrally managed device and needs following add
 When your infrastructure is up and running and you have your first Secure Connector appliance connected please enable
 pre-installed Microsoft Azure IoT Edge Components in your Barracuda Firewall Control Center:
 -   Go to Secure Connector Editor and open configuration of an individual SC or a SC template
+
     ![](./images/SecureConnectorCC.PNG)
+=======
+
 -   In the Secure Connector configuration go to Container Settings.
 -   Enable Container
 -   Define root password for container
 -   Choose Microsoft IoTEdge as your container engine
 -   Enter the IoTEdge Device Connection String
+
     ![](./images/Container.PNG)
+=======
+
 
 
 <a name="Manual"></a>
