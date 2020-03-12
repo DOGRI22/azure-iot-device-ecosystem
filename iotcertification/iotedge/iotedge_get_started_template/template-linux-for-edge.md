@@ -127,19 +127,19 @@ On the device details page of the Azure, you should see the runtime modules - ed
 ```
 - Install Azure IoT Device SDK:
 
-    pip install azure-iot-device
+    `pip install azure-iot-device`
 
 - Navigate to samples folder by executing following command:
 
-    cd azure-iot-sdk-python/device/samples/
+    `cd azure-iot-sdk-python/device/samples/`
 
 - Configfure connection string for sample code:
 
-    export IOTHUB_DEVICE_CONNECTION_STRING="<your connection string here>"
+    `export IOTHUB_DEVICE_CONNECTION_STRING="<your connection string here>"`
 
 - Run the python sample:
 
-    python3 simple_send_message.py
+    `python3 simple_send_message.py`
 
 - You schould see the massege ios scessfully send to Azure IoT Hub:
 ![](./images/pyMessage.PNG)
