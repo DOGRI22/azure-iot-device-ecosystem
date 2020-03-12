@@ -1,12 +1,10 @@
 ---
-platform: {enter the OS name running on edge device}
-device: {enter your device name here}
-language: {enter the language used to you edge device}
+platform: Debian 9 stretch
+device: Barracuda Secure Connector 2
+language: python
 ---
 
-*We highly recommend keeping this document current, and Microsoft reserves a right to remove devices and documents from the Azure IoT Device Catalog if document contains broken URL links, incorrect information etc.*
-
-Run a simple {enter the language used to you edge device} sample on {enter your device name here} device running {enter the OS name running on edge device. Specify distribution or Windows SKU information. Ex: Ubuntu Sever 16.04, Windows 10 IoT Core. Only [Tier 1 OS](https://docs.microsoft.com/en-us/azure/iot-edge/support) is allowed}
+Run a simple python sample on Barracuda Secure Connector 2 Container device running Debian 9 stretch.
 ===
 ---
 
@@ -16,22 +14,18 @@ Run a simple {enter the language used to you edge device} sample on {enter your 
 -   [Step 1: Prerequisites](#Prerequisites)
 -   [Step 2: Prepare your Device](#PrepareDevice)
 -   [Step 3: Manual Test for Azure IoT Edge on device](#Manual)
--   [Step 4: Next Steps](#NextSteps)
--   [Step 5: Troubleshooting](#Step-5-Troubleshooting)
+-   [Step 4: Run a simple Python sample on Barracuda Secure Connector](#Sample)
+-   [Step 5: Next Steps](#NextSteps)
+-   [Step 6: Troubleshooting](#Step-5-Troubleshooting)
 
-# Instructions for using this template
 
--   Replace the text in {placeholders} with correct values.
--   Delete the lines {{enclosed}} after following the instructions enclosed between them.
--   It is advisable to use external links, wherever possible.
--   Remove this section from final document.
 
 <a name="Introduction"></a>
 # Introduction
 
 **About this document**
 
-This document describes how to connect {enter your device name here} device running {enter the OS name running on edge device} with Azure IoT Edge Runtime pre-installed and Device Management. This multi-step process includes:
+This document describes how to connect Barracuda Secure Connector 2 device running Debian 9 stretch with Azure IoT Edge Runtime pre-installed and Device Management. This multi-step process includes:
 
 -   Configuring Azure IoT Hub
 -   Registering your IoT device
@@ -48,13 +42,29 @@ You should have the following items ready before beginning the process:
 -   [Sign up to IOT Hub](https://account.windowsazure.com/signup?offer=ms-azr-0044p)
 -   [Add the Edge Device](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux)
 -   [Add the Edge Modules](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#deploy-a-module)
--   {enter your device name here} device.
--   {{Please specify if any other software(s) or hardware(s) are required.}}
+-   Barracuda Secure Connector 2 device.
+-   Set-up your Barracuda SC infrastructure via:
+    -   Barracuda IoT Connect (https://campus.barracuda.com/product/cloudgenfirewall/doc/90443963/barracuda-iot-connect/), or
+    -   using Git-hub templates for setting up Barracuda Control Center, Access Controller and CloudGen Firewall (https://github.com/barracudanetworks/ngf-azure-templates/tree/master/contrib/CGF-Custom-CC-SAC-CGF)
 
 <a name="PrepareDevice"></a>
 # Step 2: Prepare your Device
 
--   {{Write down the instructions required to setup, configure and connect your device. Please use external links when possible pointing to your own page with device preparation steps.}}
+Barracuda Secure Connector is a centrally managed device and needs following additional products to run: (1) Barracuda Firewall Control Center for configuration and management and (2) Barracuda Secure Access Controller as the VPN hub for all your Secure Connector appliances. Barracuda offer two options to set-up the SC infrastructure:
+-   Barracuda IoT Connect, please visit https://campus.barracuda.com/product/cloudgenfirewall/doc/90444698/get-started-with-barracuda-iot-connect/
+-   Custom Secure Connector Azure deployment, please visit https://campus.barracuda.com/product/cloudgenfirewall/doc/91128292/barracuda-secure-connector/
+
+When your infrastructure is up and running and you have your first Secure Connector appliance connected please enable
+pre-installed Microsoft Azure IoT Edge Components in your Barracuda Firewall Control Center:
+-   Go to Secure Connector Editor and open configuration of an individual SC or a SC template
+    ![](./images/SecureConnectorCC.PNG)
+-   In the Secure Connector configuration go to Container Settings.
+-   Enable Container
+-   Define root password for container
+-   Choose Microsoft IoTEdge as your container engine
+-   Enter the IoTEdge Device Connection String
+    ![](./images/Container.PNG)
+
 
 <a name="Manual"></a>
 # Step 3: Manual Test for Azure IoT Edge on device
@@ -93,79 +103,48 @@ On the device details page of the Azure, you should see the runtime modules - ed
 
  ![](./images/tempSensor.png)
 
-<a name="Step-3-2-DeviceManagement"></a>
-## 3.2 Device Management (Optional)
+<a name="Sample"></a>
+## 4 Run a python sample
 
 **Pre-requisites:** Device Connectivity.
 
-**Description:** A device that can perform basic device management operations (Reboot and Firmware update) triggered by messages from IoT Hub.
+## 4.1 Build SDK and sample:
 
-## 3.2.1 Firmware Update (Using Microsoft SDK Samples):
+- Open a PuTTY (or SSH) session and connect to the device
+- Install the prerequisite packages for the Microsoft Azure IoT Device SDK for Python by issuing the following commands from the command line on your Secure Connector:
 
-Specify the path {{enter the path}} where the firmwareupdate client components are installed.
+    apt-get update & apt-get upgrade
+    apt-get install -y curl libcurl4-openssl-dev build-essential cmake git python2.7-dev libboost-python-dev
 
-To run the simulated device application, open a shell or command prompt window and navigate to the **iot-hub/Tutorials/FirmwareUpdate** folder in the Node.js project you downloaded. Then run the following commands:
+- Download the Microsoft Azure IoT Device SDK to the board by issuing the following command on the Secure Connector:
 
-    npm install
-    node SimulatedDevice.js "{your device connection string}"
+    git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
 
-To run the back-end application, open another shell or command prompt window. Then navigate to the **iot-hub/Tutorials/FirmwareUpdate** folder in the Node.js project you downloaded. Then run the following commands:
+- Install pip package manager:
 
-    npm install
-    node ServiceClient.js "{your service connection string}"
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py
 
-IoT device client will get the message and report the status to the device twin.
+- Install Azure IoT Device SDK:
 
- ![](./images/devicetwin.png)
+    pip install azure-iot-device
 
-**Update firmware**
+- Navigate to samples folder by executing following command:
 
-Confirm the IoT hub, Device ID, method name and method payload as below:
+    cd azure-iot-sdk-python/device/samples/
 
--   Press “call Method” button
--   Check the returning status as below:
+- Configfure connection string for sample code:
 
- ![](./images/firmware.png)
+    export IOTHUB_DEVICE_CONNECTION_STRING="<your connection string here>"
 
+- Run the python sample:
 
-## 3.2.2 Reboot (Using Microsoft SDK Samples):
+    python3 simple_send_message.py
 
-Specify the path {{enter the path}} where the components are installed 
-
-Confirm the IoT hub, Device ID, method name as below:
-
--   Press “call Method” button
--   Check the returning status as below:
-
- ![](./images/reboot.png)
+- You schould see the massege ios scessfully send to Azure IoT Hub:
+![](./images/pyMessage.PNG)
 
 
-IoT device client will get the message and report the status to the device twin.
-
- ![](./images/devicetwinmessage.png)
-  
-## 3.3.3 Firmware Update (Modified SDK samples/Custom made application):
-
-If the Client components are custom made please add the steps to execute the Firmware Update through Device Twin.
-
-**Note**: Client Components must be shipped with the device 
-
-## 3.3.4 Reboot (Modified SDK samples/Custom made application):
-
-If the Client components are custom made please add the steps to execute the Device Reboot through Direct Methods
-
-**Note**: Client Components must be shipped with the device 
-
-<a name="NextSteps"></a>
-# Step 4: Next steps
-
-Once you shared the documents with us, we will contact you in the following 48 to 72 business hours with next steps.
-
-<a name="Step-5-Troubleshooting"></a>
-# Step 5: Troubleshooting
-
-Please contact engineering support on **<mailto:iotcert@microsoft.com>** for help with troubleshooting.
-  
 [setup-devbox-linux]: https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md
 [lnk-setup-iot-hub]: ../setup_iothub.md
 [lnk-manage-iot-hub]: ../manage_iot_hub.md
