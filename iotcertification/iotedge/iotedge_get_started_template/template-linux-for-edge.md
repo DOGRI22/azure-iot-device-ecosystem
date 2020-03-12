@@ -15,8 +15,7 @@ Run a simple python sample on Barracuda Secure Connector 2 Container device runn
 -   [Step 2: Prepare your Device](#PrepareDevice)
 -   [Step 3: Manual Test for Azure IoT Edge on device](#Manual)
 -   [Step 4: Run a simple Python sample on Barracuda Secure Connector](#Sample)
--   [Step 5: Next Steps](#NextSteps)
--   [Step 6: Troubleshooting](#Step-5-Troubleshooting)
+
 
 
 
@@ -117,9 +116,9 @@ On the device details page of the Azure, you should see the runtime modules - ed
     apt-get install -y curl libcurl4-openssl-dev build-essential cmake git python2.7-dev libboost-python-dev
 ```
 - Download the Microsoft Azure IoT Device SDK to the board by issuing the following command on the Secure Connector:
-
-    `git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git`
-
+```
+git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
+```
 - Install pip package manager:
 ```
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
